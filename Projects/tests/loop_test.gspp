@@ -1,0 +1,29 @@
+for () begin
+    /$ ... $/
+end
+
+do begin
+    /$ ... $/
+end while (int a == 1)
+
+while (true) begin
+    /$ ... $/
+end
+
+while (true) begin
+    for () begin
+        do begin
+            /$ ... $/
+        end while (int a == 1)
+    end
+end
+
+int test(int a, int b) begin
+    return a + b;
+end
+
+bool k = true;
+
+void s(string t) begin
+    printf(t);
+end

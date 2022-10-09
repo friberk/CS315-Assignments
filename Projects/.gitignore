@@ -1,0 +1,4 @@
+bin/
+test*.l
+*.out
+*.yy.c
