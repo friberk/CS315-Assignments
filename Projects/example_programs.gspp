@@ -1,0 +1,24 @@
+<?gs++
+
+/$ Example Program 1 $/
+
+void main() begin
+    int $first_var1, $second_var2 = 15;
+    for (; $first_var1 <= 20; $first_var1 = $first_var1 + 1) begin
+        if (true)
+            $second_var2 = temprature;
+    end
+
+    string target_url = "http://10.50.2.67";
+    bool success = connect_to_url(target_url);
+
+    if (success == check_connection()) begin
+        send_int_to_conn(4 + 2.8);
+    end
+    else begin
+        long epoch_timestamp = timestamp;
+        return;
+    end
+end
+
+?>
