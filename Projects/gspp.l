@@ -6,26 +6,31 @@ digit [0-9]
 final {initial}|{digit}
 identifier {initial}({final})*
 /* Identifier related definitions end */
+
 /* Declaring the definitions for matching Loops */
 loop_stmt {for}|{while}|{do}
 for for
 while while
 do do
 /* Loop related definitions end */
+
 /* Declaring the definitions for matching if-else statements  */
 if if
 else else
 /* if-else related definitions end */
+
 /* Declaring the definitions for matching block statements  */
 begin begin
 end end
 /* Block related definitions end */
+
 /* Declaring the definitions for matching jump statements  */
 jump_stmt {break}|{continue}|{return}
 continue continue
 break break
 return return
 /* Jump related definitions end */
+
 /* Declaring the definitions for matching arithmetic, relational, and logical operators  */
 logical_or_op \|\|
 logical_and_op \&\&
@@ -40,6 +45,7 @@ subtraction_op \-
 multiplication_op \*
 division_op \/
 /* Arithmetic, relational, and logical operator related definitions end */
+
 /* Declaring the definitions for matching data types  */
 data_type {int_type}|{float_type}|{long_type}|{bool_type}|{char_type}|{string_type}
 int_type int
@@ -49,10 +55,12 @@ bool_type bool
 char_type char
 float_type float
 /* Data type related definitions end */
-/* */
+
+/* Declaring the definitions for matching return types */
 return_type {data_type}|{void_type}
 void_type void
-/* */
+/* Return type related definitions end */
+
 /* Declaring the definitions for matching string and chars  */
 symbol  \#|\$|\%|\&|\[|\\|\]|\^|\_|\`|\{|\||\}|\~|\*|\(|\)|\+|\,|\!|\-|\.|\/|\:|\;|\<|\=|\>|\?|\@
 character {non_whitespace_character}|{whitespace_character}
@@ -61,17 +69,19 @@ whitespace_character [ \n\t]
 char_const \'({character})?\'
 string_const \"({character})*\"
 /* String and char related definitions end */
-/* */
+
+/* Declaring the definitions for matching numberic and bool constants */
 int_const {digit}+
-/* */
 float_const {digit}*(\.)?{digit}+
-/* */
 bool_const true|false
 true true
 false false
+/* Numeric and bool constant related definitions end  */
+
 /* */
 comment \/\$(.)*\$\/
 /* */
+
 /* */
 sensor_data {temperature}|{humidity}|{air_pressure}|{air_quality}|{light_level}|{sound_level}
 temperature temperature
@@ -80,13 +90,17 @@ air_pressure air_pressure
 air_quality air_quality
 light_level light_level
 sound_level sound_level
+
 /* */
 timestamp timestamp
+/* */
+
 /* */
 switch_controls {enable_switch}|{disable_switch}
 enable_switch enable_switch
 disable_switch disable_switch
 /* */
+
 /* */
 internet_related_calls {check_connection}|{connect_to_url}|{send_int_to_conn}|{recv_int_from_conn}
 check_connection check_connection
@@ -94,6 +108,8 @@ connect_to_url connect_to_url
 send_int_to_conn send_int_to_conn
 recv_int_from_conn recv_int_from_conn
 /* */
+
+/* Declaring the definitions for matching general purpose lexemes */
 start_symbol (\<\?gs\+\+)
 end_symbol (\?\>)
 semicolon ;
@@ -101,6 +117,8 @@ comma ,
 left_parentheses \(
 right_parentheses \)
 assignment_op \=
+/* General purpose lexeme related definitions end  */
+
 %%
 {for} printf("FOR ");
 {while} printf("WHILE ");
