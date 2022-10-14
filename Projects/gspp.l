@@ -62,12 +62,8 @@ void_type void
 /* Return type related definitions end */
 
 /* Declaring the definitions for matching string and chars  */
-symbol  \#|\$|\%|\&|\[|\\|\]|\^|\_|\`|\{|\||\}|\~|\*|\(|\)|\+|\,|\!|\-|\.|\/|\:|\;|\<|\=|\>|\?|\@
-character {non_whitespace_character}|{whitespace_character}
-non_whitespace_character {symbol}|{letter}|{digit}
-whitespace_character [ \n\t]
-char_const \'({character})?\'
-string_const \"({character})*\"
+char_const \'(.)?\'
+string_const \"(.)*\"
 /* String and char related definitions end */
 
 /* Declaring the definitions for matching numberic and bool constants */
@@ -177,5 +173,5 @@ assignment_op \=
 {assignment_op} printf("ASSIGNMENT_OP ");
 {comment} printf("COMMENT ");
 {identifier} printf("IDENTIFIER ");
-{whitespace_character} printf("%s", yytext);
+[ \n\t] printf("%s", yytext);
 . ;

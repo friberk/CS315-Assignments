@@ -6,7 +6,7 @@ void func_1() begin
     int $first_var1, $second_var2 = 15;
     for (; $first_var1 <= 20; $first_var1 = $first_var1 + 1) begin
         if (true)
-            $second_var2 = temprature;
+            $second_var2 = temperature;
     end;
 
     string target_url = "http://10.50.2.67";
@@ -106,7 +106,7 @@ string func_5(char a1, string target_url) begin
         return "SEND SUCCESS";
     end;
 
-    for (int i = 0; i < temprature; i = i + 1) begin
+    for (int i = 0; i < temperature; i = i + 1) begin
         if (a1 == 't') begin
             return " 1\&%/~   ";
         end;
