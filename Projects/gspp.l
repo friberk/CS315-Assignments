@@ -120,7 +120,7 @@ assignment_op \=
 {do} return (DO);
 {if} return (IF);
 {else} return (ELSE);
-{begin} return (BEGIN);
+{begin} return (BEGIN_);
 {end} return (END);
 {continue} return (CONTINUE);
 {break} return (BREAK);
@@ -149,7 +149,7 @@ assignment_op \=
 {true} {yylval.bool_val = true; return (BOOL_CONST);}
 {false} {yylval.bool_val = false; return (BOOL_CONST);}
 {char_const} {yylval.char_val = yytext[0]; return (CHAR_CONST);}
-{string_const} {strcpy(yylval.string_val, yytext); return (STRING_CONST)};
+{string_const} {strcpy(yylval.string_val, yytext); return (STRING_CONST);};
 {temperature} return (TEMPERATURE);
 {humidity} return (HUMIDITY);
 {air_pressure} return (AIR_PRESSURE);
@@ -172,7 +172,7 @@ assignment_op \=
 {assignment_op} return (ASSIGNMENT_OP);
 {comment} return (COMMENT);
 {identifier} return (IDENTIFIER);
-[\n] {extern line_number; line_number = line_number + 1;}
+[\n] {extern int line_number; line_number = line_number + 1;}
 [ \t] ;
 . ;
 

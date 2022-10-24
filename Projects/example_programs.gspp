@@ -5,16 +5,17 @@
 void func_1() begin
     int $first_var1, $second_var2 = 15;
     for (; $first_var1 <= 20; $first_var1 = $first_var1 + 1) begin
-        if (true)
+        if (true) begin
             $second_var2 = temperature;
+        end;
     end;
 
     string target_url = "http://10.50.2.67";
-    bool success = connect_to_url(target_url);
+    bool success = connect_to_url(target_url, 1);
 
-    if (success == check_connection()) begin
-        send_int_to_conn(4 + 2.8);
-    end;
+    if (success == check_connection(1)) begin
+        send_int_to_conn(4 + 2.8, 1); /$ Send an integer to connection with ID 1 $/
+    end
     else begin
         long epoch_timestamp = timestamp;
         return;
@@ -34,20 +35,21 @@ int func_2(string url) begin
 
     do begin
         string s1 = "humidity program";
-        if (check_connection() != true) begin
-            connect_to_url(url);
-            send_int_to_conn(air_pressure);
+        if (check_connection(3 * 5 + 2) != true) begin
+            conn_id = 3 * 5 + 2;
+            connect_to_url(url, (3 * 5 + 2));
+            send_int_to_conn(air_pressure, conn_id);
         end
         else begin
             continue;
         end;
     end while (humidity <= 5000);
 
-    enable_switch(5 / 2);
+    enable_switch(5);
     disable_switch(0);
 
     return light_level;
-end
+end;
 
 ?>
 
@@ -67,8 +69,9 @@ bool func_3(float val, int a, char b) begin
     bool in_danger = true;
 
     while (true) begin
-        if (sound_level > 1000 || val < .7)
+        if (sound_level > 1000 || val < .7) begin
             break;
+        end;
         in_danger = false;
     end;
 
@@ -82,7 +85,7 @@ end;
 /$ Example Program 4 $/
 
 float func_4(long l, bool test) begin
-    if (test == enable_switch(l)) begin
+    if (test == enable_switch(7)) begin
         l = timestamp;
     end;
 
@@ -101,15 +104,15 @@ string func_5(char a1, string target_url) begin
     int c1, c2;
     int c3 = c1 = c2 = 23;
 
-    if (connect_to_url(target_url) == check_connection()) begin
-        send_int_to_conn(c2 + c1 * (c3 / c1 + 2 * 3.5) / 7);
+    if (connect_to_url(target_url, 2) == check_connection(2)) begin
+        send_int_to_conn(c2 + c1 * (c3 / c1 + 2 * 3.5) / 7, 2);
         return "SEND SUCCESS";
     end;
 
     for (int i = 0; i < temperature; i = i + 1) begin
         if (a1 == 't') begin
             return " 1\&%/~   ";
-        end;
+        end
         else begin
             return "*?!*2ds.,";
         end;
