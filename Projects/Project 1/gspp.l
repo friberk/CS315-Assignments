@@ -1,3 +1,4 @@
+%option main
 /* Declaring the definitions for matching Identifiers */
 initial {letter}|\$|\_
 letter [a-zA-Z]
@@ -68,7 +69,7 @@ string_const \"(.)*\"
 /* Declaring the definitions for matching numberic and bool constants */
 int_const {digit}+
 float_const {digit}*(\.)?{digit}+
-bool_const {true}|{false}
+bool_const true|false
 true true
 false false
 /* Numeric and bool constant related definitions end  */
@@ -115,66 +116,62 @@ assignment_op \=
 /* General purpose lexeme related definitions end  */
 
 %%
-{for} return (FOR);
-{while} return (WHILE);
-{do} return (DO);
-{if} return (IF);
-{else} return (ELSE);
-{begin} return (BEGIN);
-{end} return (END);
-{continue} return (CONTINUE);
-{break} return (BREAK);
-{return} return (RETURN);
-{logical_or_op} return (LOGICAL_OR_OP);
-{logical_and_op} return (LOGICAL_AND_OP);
-{equality_op} return (EQUALITY_OP);
-{inequality_op} return (INEQUALITY_OP);
-{less_than_op} return (LESS_THAN_OP);
-{greater_than_op} return (GREATER_THAN_OP);
-{less_than_or_equal_op} return (LESS_THAN_OR_EQUAL_OP);
-{greater_than_or_equal_op} return (GREATER_THAN_OR_EQUAL_OP);
-{addition_op} return (ADDITION_OP);
-{subtraction_op} return (SUBTRACTION_OP);
-{multiplication_op} return (MULTIPLICATION_OP);
-{division_op} return (DIVISION_OP);
-{int_type} return (INT_TYPE);
-{float_type} return (FLOAT_TYPE);
-{long_type} return (LONG_TYPE);
-{bool_type} return (BOOL_TYPE);
-{char_type} return (CHAR_TYPE);
-{string_type} return (STRING_TYPE);
-{void_type} return (VOID_TYPE);
-{int_const} {sscanf(yytext, "%d", &yylval.int_val); return (INT_CONST);}
-{float_const} {sscanf(yytext, "%lf", &yylval.float_val); return (FLOAT_CONST);}
-{true} {yylval.bool_val = true; return (BOOL_CONST);}
-{false} {yylval.bool_val = false; return (BOOL_CONST);}
-{char_const} {yylval.char_val = yytext[0]; return (CHAR_CONST);}
-{string_const} {strcpy(yylval.string_val, yytext); return (STRING_CONST)};
-{temperature} return (TEMPERATURE);
-{humidity} return (HUMIDITY);
-{air_pressure} return (AIR_PRESSURE);
-{air_quality} return (AIR_QUALITY);
-{light_level} return (LIGHT_LEVEL);
-{sound_level} return (SOUND_LEVEL);
-{timestamp} return (TIMESTAMP);
-{enable_switch} return (ENABLE_SWITCH);
-{disable_switch} return (DISABLE_SWITCH);
-{check_connection} return (CHECK_CONNECTION);
-{connect_to_url} return (CONNECT_TO_URL);
-{send_int_to_conn} return (SEND_INT_TO_CONN);
-{recv_int_from_conn} return (RECV_INT_FROM_CONN);
-{start_symbol} return (START_SYMBOL);
-{end_symbol} return (END_SYMBOL);
-{semicolon} return (SEMICOLON);
-{comma} return (COMMA);
-{left_parentheses} return (LP);
-{right_parentheses} return (RP);
-{assignment_op} return (ASSIGNMENT_OP);
-{comment} return (COMMENT);
-{identifier} return (IDENTIFIER);
-[\n] {extern line_number; line_number = line_number + 1;}
-[ \t] ;
+{for} printf("FOR ");
+{while} printf("WHILE ");
+{do} printf("DO ");
+{if} printf("IF ");
+{else} printf("ELSE ");
+{begin} printf("BEGIN ");
+{end} printf("END ");
+{continue} printf("CONTINUE ");
+{break} printf("BREAK ");
+{return} printf("RETURN ");
+{logical_or_op} printf("LOGICAL_OR_OP ");
+{logical_and_op} printf("LOGICAL_AND_OP ");
+{equality_op} printf("EQUALITY_OP ");
+{inequality_op} printf("INEQUALITY_OP ");
+{less_than_op} printf("LESS_THAN_OP ");
+{greater_than_op} printf("GREATER_THAN_OP ");
+{less_than_or_equal_op} printf("LESS_THAN_OR_EQUAL_OP ");
+{greater_than_or_equal_op} printf("GREATER_THAN_OR_EQUAL_OP ");
+{addition_op} printf("ADDITION_OP ");
+{subtraction_op} printf("SUBTRACTION_OP ");
+{multiplication_op} printf("MULTIPLICATION_OP ");
+{division_op} printf("DIVISION_OP ");
+{int_type} printf("INT_TYPE ");
+{float_type} printf("FLOAT_TYPE ");
+{long_type} printf("LONG_TYPE ");
+{bool_type} printf("BOOL_TYPE ");
+{char_type} printf("CHAR_TYPE ");
+{string_type} printf("STRING_TYPE ");
+{void_type} printf("VOID_TYPE ");
+{int_const} printf("INT_CONST ");
+{float_const} printf("FLOAT_CONST ");
+{true} printf("TRUE ");
+{false} printf("FALSE ");
+{char_const} printf("CHAR_CONST ");
+{string_const} printf("STRING_CONST ");
+{temperature} printf("TEMPERATURE ");
+{humidity} printf("HUMIDITY ");
+{air_pressure} printf("AIR_PRESSURE ");
+{air_quality} printf("AIR_QUALITY ");
+{light_level} printf("LIGHT_LEVEL ");
+{sound_level} printf("SOUND_LEVEL ");
+{timestamp} printf("TIMESTAMP ");
+{enable_switch} printf("ENABLE_SWITCH ");
+{disable_switch} printf("DISABLE_SWITCH ");
+{check_connection} printf("CHECK_CONNECTION ");
+{connect_to_url} printf("CONNECT_TO_URL ");
+{send_int_to_conn} printf("SEND_INT_TO_CONN ");
+{recv_int_from_conn} printf("RECV_INT_FROM_CONN ");
+{start_symbol} printf("START_SYMBOL ");
+{end_symbol} printf("END_SYMBOL ");
+{semicolon} printf("SEMICOLON ");
+{comma} printf("COMMA ");
+{left_parentheses} printf("LP ");
+{right_parentheses} printf("RP ");
+{assignment_op} printf("ASSIGNMENT_OP ");
+{comment} printf("COMMENT ");
+{identifier} printf("IDENTIFIER ");
+[ \n\t] printf("%s", yytext);
 . ;
-
-%%
-int yywrap() { return 1; }
