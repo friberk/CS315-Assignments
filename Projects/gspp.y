@@ -14,7 +14,7 @@ void yyerror(char *s);
     char string_val[30];
 }
 
-%token FOR WHILE DO IF ELSE BEGIN_ END CONTINUE BREAK RETURN LOGICAL_OR_OP LOGICAL_AND_OP
+%token FOR WHILE DO IF ELSEIF ELSE BEGIN_ END CONTINUE BREAK RETURN LOGICAL_OR_OP LOGICAL_AND_OP
        EQUALITY_OP INEQUALITY_OP LESS_THAN_OP GREATER_THAN_OP LESS_THAN_OR_EQUAL_OP
        GREATER_THAN_OR_EQUAL_OP ADDITION_OP SUBTRACTION_OP MULTIPLICATION_OP DIVISION_OP
        INT_TYPE FLOAT_TYPE LONG_TYPE BOOL_TYPE CHAR_TYPE STRING_TYPE VOID_TYPE TEMPERATURE
@@ -38,12 +38,19 @@ stmt_list: stmt SEMICOLON
          | COMMENT stmt_list
          | COMMENT
          ;
-stmt: if_stmt
+stmt: conditional_stmt
     | other_stmt
     ;
+conditional_stmt: if_stmt;
 if_stmt: IF LP expr RP block_stmt
-       | IF LP expr RP block_stmt ELSE block_stmt
+       | IF LP expr RP block_stmt else_stmt
+       | IF LP expr RP block_stmt elseif_stmt
+       | IF LP expr RP block_stmt elseif_stmt else_stmt
        ;
+elseif_stmt: ELSEIF LP expr RP block_stmt
+           | ELSEIF LP expr RP block_stmt elseif_stmt
+           ;
+else_stmt: ELSE block_stmt;
 /* stmt: matched
     | unmatched
     ; */

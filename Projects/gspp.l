@@ -15,6 +15,7 @@ do do
 
 /* Declaring the definitions for matching if-else statements  */
 if if
+elseif elseif
 else else
 /* if-else related definitions end */
 
@@ -119,6 +120,7 @@ assignment_op \=
 {while} return (WHILE);
 {do} return (DO);
 {if} return (IF);
+{elseif} return (ELSEIF);
 {else} return (ELSE);
 {begin} return (BEGIN_);
 {end} return (END);
