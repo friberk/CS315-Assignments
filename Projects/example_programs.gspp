@@ -16,9 +16,12 @@ void func_1() begin
     if (success == check_connection(1)) begin
         send_int_to_conn(4 + 2.8, 1); /$ Send an integer to connection with ID 1 $/
     end
+    elseif ($second_var2 > 30) begin
+        output("IT IS TOO HOT, EXITING...");
+        return;
+    end
     else begin
         long epoch_timestamp = timestamp;
-        return;
     end;
 end;
 
@@ -102,7 +105,7 @@ end;
 
 string func_5(char a1, string target_url) begin
     int c1, c2;
-    int c3 = c1 = c2 = 23;
+    int c3 = c1, c2 = 23;
 
     if (connect_to_url(target_url, 2) == check_connection(2)) begin
         send_int_to_conn(c2 + c1 * (c3 / c1 + 2 * 3.5) / 7, 2);
@@ -116,6 +119,29 @@ string func_5(char a1, string target_url) begin
         else begin
             return "*?!*2ds.,";
         end;
+    end;
+end;
+
+?>
+
+<?gs++
+
+/$ Example Program 6 $/
+
+void func_6(int digit, string err_msg) begin
+    string user_msg = input(); /$ take an input string from the user $/
+    string target_url = "http://192.168.0.4";
+
+    bool conn_success = connect_to_url(target_url, 123);
+
+    /$ checking the connection $/ if (conn_success == check_connection(123)) begin
+        output("CONNECTION SUCCESSFUL\n");
+        outputf("CONNECTED TO THE URL: %s\n", target_url);
+        outputf("IoT TEMP IS = %d SL IS = %d", temperature, sound_level);
+    end
+    else begin
+        output("CONNECTION FAILED\n");
+        outputf("ERROR MSG: %s", err_msg);
     end;
 end;
 

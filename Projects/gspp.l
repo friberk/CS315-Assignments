@@ -74,11 +74,11 @@ true true
 false false
 /* Numeric and bool constant related definitions end  */
 
-/* */
+/* Declaring the definitions for comments */
 comment \/\$(.)*\$\/
-/* */
+/* Comment related definitions end */
 
-/* */
+/* Declaring the definitions for IoT device sensors */
 sensor_data {temperature}|{humidity}|{air_pressure}|{air_quality}|{light_level}|{sound_level}
 temperature temperature
 humidity humidity
@@ -86,24 +86,32 @@ air_pressure air_pressure
 air_quality air_quality
 light_level light_level
 sound_level sound_level
+/* IoT device sensor related definitions end */
 
-/* */
+/* Declaring the definitions for IoT device timer */
 timestamp timestamp
-/* */
+/* IoT device timer related definitions end */
 
-/* */
+/*  Declaring the definitions for IoT switch controls */
 switch_controls {enable_switch}|{disable_switch}
 enable_switch enable_switch
 disable_switch disable_switch
-/* */
+/* IoT switch control related definitions end */
 
-/* */
+/* Declaring the definitions for IoT device connections */
 internet_related_calls {check_connection}|{connect_to_url}|{send_int_to_conn}|{recv_int_from_conn}
 check_connection check_connection
 connect_to_url connect_to_url
 send_int_to_conn send_int_to_conn
 recv_int_from_conn recv_int_from_conn
-/* */
+/* IoT device connections related definitions end */
+
+/* Declaring the definitions for input output functions */
+input_output_related_calls {input}|{output}|{formatted_output}
+input input
+output output
+formatted_output outputf
+/* Input output function related definitions end */
 
 /* Declaring the definitions for matching general purpose lexemes */
 start_symbol (\<\?gs\+\+)
@@ -165,6 +173,9 @@ assignment_op \=
 {connect_to_url} return (CONNECT_TO_URL);
 {send_int_to_conn} return (SEND_INT_TO_CONN);
 {recv_int_from_conn} return (RECV_INT_FROM_CONN);
+{input} return (INPUT);
+{output} return (OUTPUT);
+{formatted_output} return (FORMATTED_OUTPUT);
 {start_symbol} return (START_SYMBOL);
 {end_symbol} return (END_SYMBOL);
 {semicolon} return (SEMICOLON);
