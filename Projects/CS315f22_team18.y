@@ -20,8 +20,8 @@ void yyerror(char *s);
        INT_TYPE FLOAT_TYPE LONG_TYPE BOOL_TYPE CHAR_TYPE STRING_TYPE VOID_TYPE TEMPERATURE
        HUMIDITY AIR_PRESSURE AIR_QUALITY LIGHT_LEVEL SOUND_LEVEL TIMESTAMP ENABLE_SWITCH
        DISABLE_SWITCH CHECK_CONNECTION CONNECT_TO_URL SEND_INT_TO_CONN RECV_INT_FROM_CONN
-       START_SYMBOL END_SYMBOL SEMICOLON COMMA LP RP ASSIGNMENT_OP COMMENT IDENTIFIER
-       INPUT OUTPUT FORMATTED_OUTPUT
+       START_SYMBOL END_SYMBOL SEMICOLON COMMA LP RP ASSIGNMENT_OP COMMENT IDENTIFIER INPUT
+       OUTPUT FORMATTED_OUTPUT INVALID
 
 %token <int_val> INT_CONST
 %token <float_val> FLOAT_CONST
@@ -29,15 +29,25 @@ void yyerror(char *s);
 %token <char_val> CHAR_CONST
 %token <string_val> STRING_CONST
 
+%type <int_val> int_const signed_int_const unsigned_int_const
+%type <float_val> float_const signed_float_const unsigned_float_const
+
 %%
-program_list: program_list program
-             | program
+program_list: program
+             | program error program_list
+             | program program_list
              ;
 program: START_SYMBOL stmt_list END_SYMBOL;
+/* <stmt_list> is different from the BNF in the report. */
+/* Because the "error" keyword is special to yacc. */
 stmt_list: stmt SEMICOLON
          | stmt SEMICOLON stmt_list
          | COMMENT stmt_list
          | COMMENT
+         | error program_list
+         | error stmt_list
+         | error stmt
+         | error
          ;
 stmt: conditional_stmt
     | declaration_stmt
@@ -123,12 +133,26 @@ data_type: INT_TYPE
          | CHAR_TYPE
          | STRING_TYPE
          ;
-constant: INT_CONST
-        | FLOAT_CONST
+constant: int_const
+        | float_const
         | BOOL_CONST
         | CHAR_CONST
         | STRING_CONST
         ;
+int_const: unsigned_int_const
+         | signed_int_const
+         ;
+signed_int_const: ADDITION_OP unsigned_int_const { $$ = $2; }
+                | SUBTRACTION_OP unsigned_int_const { $$ = -1 * $2; }
+                ;
+unsigned_int_const: INT_CONST {$$ = $1;};
+float_const: signed_float_const
+           | unsigned_float_const
+           ;
+signed_float_const: ADDITION_OP FLOAT_CONST { $$ = $2; }
+                  | SUBTRACTION_OP FLOAT_CONST { $$ = -1 * $2; }
+                  ;
+unsigned_float_const: FLOAT_CONST { $$ = $1; };
 func_definition: VOID_TYPE IDENTIFIER LP RP block_stmt
                | VOID_TYPE IDENTIFIER LP param_list RP block_stmt
                | data_type IDENTIFIER LP RP block_stmt
@@ -153,8 +177,8 @@ sensor_data: TEMPERATURE
 switch_controls: enable_switch
                | disable_switch
                ;
-enable_switch: ENABLE_SWITCH LP INT_CONST RP {if (($3 >= 0 && $3 <= 9) == false) {yyerror("syntax error"); return 1;}};
-disable_switch: DISABLE_SWITCH LP INT_CONST RP {if (($3 >= 0 && $3 <= 9) == false) {yyerror("syntax error"); return 1;}};
+enable_switch: ENABLE_SWITCH LP int_const RP {if (!($3 >= 0 && $3 <= 9)) {yyerror("syntax error"); yyerrok;}};
+disable_switch: DISABLE_SWITCH LP int_const RP {if (!($3 >= 0 && $3 <= 9)) {yyerror("syntax error"); yyerrok;}};
 internet_related_calls: check_connection
                       | connect_to_url
                       | send_int_to_conn

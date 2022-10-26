@@ -1,0 +1,113 @@
+<?gs++
+
+/$ Faulty Program 1 $/
+
+/$ MULTILINE COMMENTS ARE
+    NOT ALLOWED
+$/
+
+int a = b,c = d, e, f = 0;
+
+int func_1(int a, int b) begin
+    a = sound_level;
+
+    for (int i = 0; i < b; i = i + 1) begin
+        int timer = 0 /$ SEMICOLON ERROR $/
+
+        /$ wait some $/ do begin
+            timer = timer + 1;
+        end while(timer <= 10 * 10 * 10 * 10 * 10) /$ SEMICOLON ERROR $/
+
+        c = temperature;
+        d = air_quality;
+    end;
+
+    /$ NOT SUPPORTED FEATURE $/
+    return -(c / d);
+end;
+
+-e = func_1(e, f); /$ INVALID IDENTIFIER NAME $/
+?>
+
+/$ BETWEEN THE PROGRAMS HAVE TO BE EMPTY $/
+
+<?gs++
+
+/$ Faulty Program 2 $/
+
+int x = 24; char 9c = 'b'; /$ INVALID IDENTIFIER NAME $/
+
+connect_to_url("https://bilkent.edu.tr"); /$ MISSING ID $/
+
+for(; x <= 2;) begin
+
+end; /$ EMPTY STATEMENTS ARE NOT ALLOWED $/
+
+string check;
+
+if (air_pressure ~= 20) begin /$ NOT EXISTING OPERATOR $/
+    check = "air pressure is over 20!";
+end;
+
+/$ MISSING ? $/ >
+
+<?gs++
+
+/$ Faulty Program 3 $/
+
+bool func_3(int x) begin
+    bool success = false;
+    x = int wrong, t = z = 4; /$ WRONG ASSIGNMENT & DECLARATION $/
+
+    floaty y = 0.0; /$ WRONG DATA TYPE $/
+    void t = "t cannot be void"; /$ VOID CAN ONLY BE USED AS A RETURN TYPE $/
+    int foo = -4;
+
+    if (foo >= 0) begin
+        foo = 1 * 2 + -5;
+    end /$ CANNOT INSERT COMMENT BETWEEN A CONTINUOUS STATEMENT $/
+    elseif (light_level > foo) begin /$ ELSEIF STATEMENT DOES NOT HAVE A VALID PARENT IF $/
+        string target_url = "http://10.2.53.36";
+        connect_to_url(target_url, foo);
+    end;
+
+    /$ MISSING BLOCK STATEMENT AFTER THE IF $/
+    if (foo == 0)
+        outputf("%l", timestamp)
+
+    else begin /$ ELSE STATEMENT DOES NOT HAVE A VALID PARENT IF $/
+        int bar = input();
+        if (check_connection(bar) == true) begin
+            success = true;
+        end;
+    end;
+
+    return success;
+end;
+
+?>
+
+<?gs++
+
+/$ Faulty Program 4 $/
+
+if (temperature == 20) begin
+    bool flag = check_connection(3);
+    if (flag) begin
+        send_int_to_conn(timestamp); /$ MISSING ID $/
+    end;
+end
+elseif ($second_var2 > 30) begin
+    /$ Here is left empty deliberately $/
+end
+else; begin /$ SEMICOLON IS NEEDED ONLY AT THE VERY END OF AN IF-ELSEIF-ELSE STATEMENT $/
+    int humidity_level = humidity;
+end;
+
+/$ ONLY THE DIGITS ARE ACCEPTED IN THE SWITCH CONTROL FUNCTIONS (BECAUSE THERE ARE ONLY 10 SWITCHES) $/
+enable_switch(11);
+disable_switch(-54);
+
+?>
+
+/$ BETWEEN OR OUTSIDE OF THE PROGRAMS HAVE TO BE EMPTY $/

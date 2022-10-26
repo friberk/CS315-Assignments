@@ -10,6 +10,8 @@ void func_1() begin
         end;
     end;
 
+    float a = 5 - +2.4 + 2 - (3 / (16 + .7));
+
     string target_url = "http://10.50.2.67";
     bool success = connect_to_url(target_url, 1);
 
@@ -38,9 +40,9 @@ int func_2(string url) begin
 
     do begin
         string s1 = "humidity program";
-        if (check_connection(3 * 5 + 2) != true) begin
-            conn_id = 3 * 5 + 2;
-            connect_to_url(url, (3 * 5 + 2));
+        if (check_connection(3 * 5 + -2) != true) begin
+            conn_id = 3 * 5 + (-2);
+            connect_to_url(url, (conn_id));
             send_int_to_conn(air_pressure, conn_id);
         end
         else begin
@@ -72,7 +74,7 @@ bool func_3(float val, int a, char b) begin
     bool in_danger = true;
 
     while (true) begin
-        if (sound_level > 1000 || val < .7) begin
+        if (sound_level > -1000 && val < +.7 || true) begin
             break;
         end;
         in_danger = false;
@@ -108,7 +110,7 @@ string func_5(char a1, string target_url) begin
     int c3 = c1, c2 = 23;
 
     if (connect_to_url(target_url, 2) == check_connection(2)) begin
-        send_int_to_conn(c2 + c1 * (c3 / c1 + 2 * 3.5) / 7, 2);
+        send_int_to_conn(c2 + c1 * (c3 / c1 + 2 * 3.5) / -7, +2);
         return "SEND SUCCESS";
     end;
 
@@ -132,9 +134,9 @@ void func_6(int digit, string err_msg) begin
     string user_msg = input(); /$ take an input string from the user $/
     string target_url = "http://192.168.0.4";
 
-    bool conn_success = connect_to_url(target_url, 123);
+    bool conn_success = connect_to_url(target_url, -123);
 
-    /$ checking the connection $/ if (conn_success == check_connection(123)) begin
+    /$ checking the connection $/ if (conn_success == check_connection(-123)) begin
         output("CONNECTION SUCCESSFUL\n");
         outputf("CONNECTED TO THE URL: %s\n", target_url);
         outputf("IoT TEMP IS = %d SL IS = %d", temperature, sound_level);

@@ -187,6 +187,7 @@ assignment_op \=
 {identifier} return (IDENTIFIER);
 [\n] {extern int line_number; line_number = line_number + 1;}
 [ \t] ;
+[!-~] return (INVALID);
 . ;
 
 %%
