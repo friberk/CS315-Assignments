@@ -1,5 +1,5 @@
-LEX_FILE := $(wildcard *.l)
-YACC_FILE := $(wildcard *.y)
+LEX_FILE := CS315f22_team18.lex
+YACC_FILE := CS315f22_team18.yacc
 
 CXX        := gcc
 
@@ -9,10 +9,10 @@ EXECUTABLE := parser
 all: clean generate_parser
 
 check_valid_programs: all
-	@-$(SRC)/$(EXECUTABLE) < example_programs.gspp
+	@-$(SRC)/$(EXECUTABLE) < CS315f22_team18_example_valid_programs.txt
 
 check_faulty_programs: all
-	@-$(SRC)/$(EXECUTABLE) < example_faulty_programs.gspp
+	@-$(SRC)/$(EXECUTABLE) < CS315f22_team18_example_faulty_programs.txt ||:
 
 generate_yacc: $(SRC)/$(LEX_FILE) $(SRC)/$(YACC_FILE)
 	@-yacc -o $(SRC)/y.tab.c $(SRC)/$(YACC_FILE)

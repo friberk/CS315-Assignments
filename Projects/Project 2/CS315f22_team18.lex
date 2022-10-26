@@ -1,3 +1,5 @@
+/* GS++ Lex Specification File */
+
 /* Declaring the definitions for matching Identifiers */
 initial {letter}|\$|\_
 letter [a-zA-Z]

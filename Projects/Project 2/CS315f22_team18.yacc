@@ -1,3 +1,5 @@
+/* GS++ Yacc Specification File */
+
 %{
 #include <stdio.h>
 #include <stdlib.h>
@@ -33,18 +35,17 @@ void yyerror(char *s);
 %type <float_val> float_const signed_float_const unsigned_float_const
 
 %%
+/* <stmt_list> and <program_list> is different from the BNF in the report. */
+/* Because the "error" keyword is special to yacc. */
 program_list: program
-             | program error program_list
+             | program error program_list /* To capture errors between the programs */
              | program program_list
              ;
 program: START_SYMBOL stmt_list END_SYMBOL;
-/* <stmt_list> is different from the BNF in the report. */
-/* Because the "error" keyword is special to yacc. */
 stmt_list: stmt SEMICOLON
          | stmt SEMICOLON stmt_list
          | COMMENT stmt_list
          | COMMENT
-         | error program_list
          | error stmt_list
          | error stmt
          | error
@@ -177,8 +178,8 @@ sensor_data: TEMPERATURE
 switch_controls: enable_switch
                | disable_switch
                ;
-enable_switch: ENABLE_SWITCH LP int_const RP {if (!($3 >= 0 && $3 <= 9)) {yyerror("syntax error"); yyerrok;}};
-disable_switch: DISABLE_SWITCH LP int_const RP {if (!($3 >= 0 && $3 <= 9)) {yyerror("syntax error"); yyerrok;}};
+enable_switch: ENABLE_SWITCH LP int_const RP {if (($3 >= 0 && $3 <= 9) == false) {yyerror("syntax error"); yyerrok;}};
+disable_switch: DISABLE_SWITCH LP int_const RP {if (($3 >= 0 && $3 <= 9) == false) {yyerror("syntax error"); yyerrok;}};
 internet_related_calls: check_connection
                       | connect_to_url
                       | send_int_to_conn

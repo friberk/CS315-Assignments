@@ -3,3 +3,4 @@ test*.l
 *.out*
 *.yy.c
 *.tab.c
+parser
