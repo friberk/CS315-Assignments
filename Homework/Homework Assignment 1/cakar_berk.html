@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h1>Press F12 to open the console and view the results.</h1>
+    <script>
+        // A function to print the given key-value pair
+        function foo(key, value) {
+            console.log(key + ": " + value);
+        }
+
+        console.log('PART 1: INITIALIZE ----------------------------------------------------------');
+
+        // Initialize the associative array old way, it is an object actually
+        var oldMap = {
+            'name': 'Berk Çakar',
+            'university': 'Bilkent University',
+            'department': 'Computer Engineering',
+            'universityIdNo': 22003021,
+            'isUndergraduate': true,
+            'age': 21,
+            'height': 1.82,
+        }
+
+        // Map data structure initialization
+        var map = new Map([
+            ['name', 'Berk Çakar'],
+            ['university', 'Bilkent University'],
+            ['department', 'Computer Engineering'],
+            ['universityIdNo', 22003021],
+            ['isUndergraduate', true],
+            ['age', 21],
+            ['height', 1.82],
+        ]);
+
+        console.log(oldMap);
+        console.log(map);
+        console.log('Associative array has been initialized successfully');
+
+        console.log('\nPART 2: GET THE VALUE FOR THE GIVEN KEY -------------------------------------');
+
+        // Get the value for the given key
+        console.log(map.get('name'));
+        console.log(map.get('university'));
+        console.log(map.get('department'));
+        console.log(map.get('universityIdNo'));
+        console.log(map.get('isUndergraduate'));
+        console.log(map.get('age'));
+
+        console.log('\nPART 3: ADD A NEW ELEMENT ---------------------------------------------------');
+
+        console.log('Adding \'weight\' key with value 70');
+        // Add a new element
+        map.set('weight', 70);
+        console.log('weight: ' + map.get('weight'));
+
+        console.log('\nPART 4: REMOVE AN ELEMENT ---------------------------------------------------');
+
+        console.log('Removing \'isUndergraduate\' key');
+        // Remove an element
+        map.delete('isUndergraduate');
+        console.log('isUndergraduate: ' + map.get('isUndergraduate'));
+
+        console.log('\nPART 5: MODIFY THE VALUE OF AN EXISTING ELEMENT -----------------------------');
+
+        console.log('Value of the \'age\' key before: ' + map.get('age'));
+        console.log('Modifying the value of the \'age\' key');
+        // Modify the value of an existing element
+        map.set('age', 22);
+        console.log('Value of the \'age\' key after: ' + map.get('age'));
+
+        console.log('\nPART 6: SEARCH FOR THE EXISTENCE OF A KEY -----------------------------------');
+
+        // Search for the existence of a key
+        if (map.has('name')) {
+            console.log('\'name\' key exists');
+        } else {
+            console.log('\'name\' key does not exist');
+        }
+
+        if (map.has('isUndergraduate')) {
+            console.log('\'isUndergraduate\' key exists');
+        } else {
+            console.log('\'isUndergraduate\' key does not exist');
+        }
+
+        console.log('\nPART 7: SEARCH FOR THE EXISTENCE OF A VALUE ---------------------------------');
+
+        // Search for the existence of a value
+        if ([...map.values()].includes(22003021)) {
+            console.log('22003021 value exists in one of the keys');
+        } else {
+            console.log('22003021 value does not exist in one of the keys');
+        }
+
+        // Search for the existence of a value
+        if ([...map.values()].includes("Basketball")) {
+            console.log('Basketball value exists in one of the keys');
+        } else {
+            console.log('Basketball value does not exist in one of the keys');
+        }
+
+        console.log('\nPART 8: PRINT THE ASSOCIATIVE ARRAY VIA THE FOO FUNCTION --------------------');
+
+        // Loop through an associative array, apply a function, called foo, which simply prints the key-value pair
+        for (let [key, value] of map) {
+            foo(key, value);
+        }
+    </script>
+</body>
+
+</html>

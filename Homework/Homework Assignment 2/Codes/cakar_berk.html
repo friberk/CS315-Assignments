@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h1>Press F12 to open the console and view the results.</h1>
+    <script>
+        console.log("INTRODUCTION TO USER-LOCATED LOOP CONTROL MECHANISMS IN JAVASCRIPT");
+
+        while (true) {
+            console.log("iterating once");
+            break;
+        }
+
+        for (let i = 0; i < 10; i++) {
+            continue; // continue to the next iteration without executing the rest of the loop body (print statement)
+            console.log("$i");
+        }
+
+        // Labels can also be used to break out of nested loops (see the examples below)
+
+        console.log("\nSAMPLE 1: BREAK -------------------------------------------------------------");
+
+        // An example for break
+        for (let i = 1; i <= 6; i++) {
+            for (let j = 1; j <= 6; j++) {
+                /*
+                   When both i and j are 2, break out the inner loop
+                   i.e., '2 2' '2 3' '2 4' '2 5' and '2 6' will not be printed
+                */
+                if (i == 2 && j == 2) {
+                    console.log("i j are 2 2, break out the inner loop");
+                    break;
+                }
+
+                console.log(i + " " + j);
+            }
+            /*
+               When i is 4, break out the outer loop, otherwise the outer loop will
+               continue to print '4 1' '4 2' ... '6 6'
+            */
+            if (i == 4) {
+                console.log("Fourth iteration of outer loop is completed, now break out the outer loop");
+                break;
+            }
+        }
+
+        console.log("\nSAMPLE 2: CONTINUE ----------------------------------------------------------");
+
+        // An example for continue
+        var days = {
+            1: "monday",
+            2: "tuesday",
+            3: "wednesday",
+            4: "thursday",
+            5: "friday",
+            6: "saturday",
+            7: "sunday",
+        };
+        for (let day in days) {
+            /*
+               When the for loop encounters 6th and 7th day of the week, continue to the next iteration
+               i.e., 'saturday' and 'sunday' will not be printed
+            */
+            if (day % 7 == 6 || day % 7 == 0) {
+                continue;
+            }
+
+            console.log(days[day] + " is a week day");
+        }
+
+        console.log("\nSAMPLE 3: LABELED BREAK -----------------------------------------------------");
+
+        // An example for labeled break
+        var i = 4;
+        outerLoop: while (i > 0) {
+            console.log("in outer loop i is: " + i);
+            innerLoop: for (let j = 6; j > 0; j--) {
+                /*
+                   When i is 2 break out the outer loop
+                   which means that the outer loop will be terminated
+                */
+                if (i == 2) {
+                    console.log("i is 2, break out the outer loop, otherwise the outer loop will continue to print until i reaches 1");
+                    break outerLoop;
+                }
+                console.log("  in inner loop j is : " + j);
+                /*
+                   When j is 5 break out the inner loop
+                   which means that the inner loop will only print
+                   6 and 5 instead of 6, 5, ..., 1
+                */
+                if (j == 5) {
+                    console.log("j is 5, break out the inner loop, otherwise the inner loop will continue to print until j reaches 1");
+                    break innerLoop;
+                }
+            }
+            i--;
+        }
+
+        console.log("\nSAMPLE 4: LABELED CONTINUE --------------------------------------------------");
+
+        // An example for labeled continue
+        var x = 0;
+        outerLoop: do {
+            console.log("in outer loop x is : " + x);
+            x++;
+            innerLoop: for (let k = 0; k < 6; k++) {
+                /*
+                   When k is 3 continue to the next iteration of the outer loop
+                   which means that the inner loop will only print
+                   0, 1, 2 instead of 0 to 5
+                */
+                if (k == 3) {
+                    console.log("k is 3, continue to the next iteration of the outer loop, the inner loop otherwise would print 0 to 5");
+                    continue outerLoop; // same as break innerLoop
+                }
+                console.log("  in inner loop k is : " + k);
+            }
+        } while (x < 4);
+    </script>
+</body>
+
+</html>
