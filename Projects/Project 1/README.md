@@ -1,9 +1,11 @@
-# CS 315 <br> Project 1
+# CS 315 Project 1
 
-**Assigned: Oct. 7, 2022
-Due: Oct. 14, 2022, 23:59**
+**Assigned:  Oct. 7, 2022  
+Due:  Oct. 14, 2022, 23:59**
 
 ## A Programming Language for IoT Devices and its Lexical Analyzer
+
+---
 
 This semester's projects are about the design of a new language for the Internet of Things (IoT) edge devices, also called nodes. Assume that you are working in the software department of a company that builds IoT devices. The hardware department constructs IoT nodes that has
 
@@ -41,7 +43,7 @@ This semester's projects are about the design of a new language for the Internet
 
     the lexical analyzer should produce the output
 
-    IF LP IDENTIFIER LESS\_EQ NUMBER RP LBRACE ...
+    `IF LP IDENTIFIER LESS\_EQ NUMBER RP LBRACE ..`
 
     ### Part C - Example Programs (30 points)
 
@@ -75,5 +77,3 @@ This semester's projects are about the design of a new language for the Internet
     *   [The Lex & Yacc Page (dinosaur.compilertools.net)](http://dinosaur.compilertools.net/)
 
     Good Luck! - Have fun.
-
-    * * *
